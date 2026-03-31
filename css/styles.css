@@ -190,3 +190,73 @@ button:disabled {
 .about p {
   margin: 12px 0;
 }
+
+/* =========================
+   MOBILE (<= 480px)
+========================= */
+@media (max-width: 480px) {
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .header nav {
+    align-self: flex-end;
+  }
+
+  .container {
+    margin: 20px auto;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  /* Article title */
+  #content h1 {
+    font-size: 24px;
+  }
+
+  /* Paragraphs */
+  #content p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* Inputs */
+  input, select {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  /* Buttons */
+  button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+}
+
+/* =========================
+   TABLET (481px - 900px)
+========================= */
+@media (max-width: 900px) {
+
+  .header,
+  .container,
+  #content,
+  .about {
+    max-width: 90%;
+  }
+
+  #content h1 {
+    font-size: 28px;
+  }
+
+  #content p {
+    font-size: 17px;
+  }
+
+}
