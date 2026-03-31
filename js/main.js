@@ -1,146 +1,148 @@
 fetch("data/articles.json")
-  .then(res => res.json())
-  .then(articles => {
+    .then(res => res.json())
+    .then(articles => {
 
-    const listEl = document.getElementById("articles-list");
-    const searchInput = document.getElementById("search-input");
-    const monthFilter = document.getElementById("month-filter");
-    const prevBtn = document.getElementById("prev-btn");
-    const nextBtn = document.getElementById("next-btn");
-    const pageInfo = document.getElementById("page-info");
+        const listEl = document.getElementById("articles-list");
+        const searchInput = document.getElementById("search-input");
+        const monthFilter = document.getElementById("month-filter");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const pageInfo = document.getElementById("page-info");
 
-    let currentPage = 1;
-    const perPage = 5;
-    let filteredData = [...articles];
+        let currentPage = 1;
+        const perPage = 5;
+        let filteredData = [...articles];
 
-    // 🔹 Helper: extract metadata from MD
-    async function getMeta(article) {
-      const res = await fetch(`articles/${article.file}`);
-      const text = await res.text();
+        // 🔹 Helper: extract metadata from MD
+        async function getMeta(article) {
+            const res = await fetch(`articles/${article.file}`);
+            const text = await res.text();
 
-      const match = text.match(/---([\s\S]*?)---/);
+            const parts = text.split('---');
 
-      let meta = { title: "No Title", date: "" };
+            let meta = { title: "No Title", date: "" };
 
-      if (match) {
-        match[1].trim().split("\n").forEach(line => {
-          const [key, ...rest] = line.split(":");
-          const value = rest.join(":").trim();
+            if (parts.length >= 3) {
+                const fm = parts[1].trim();
 
-          if (key.trim() === "title") meta.title = value;
-          if (key.trim() === "date") meta.date = value;
-        });
-      }
+                fm.split("\n").forEach(line => {
+                    const [key, ...rest] = line.split(":");
+                    const value = rest.join(":").trim();
 
-      return meta;
-    }
+                    if (key.trim() === "title") meta.title = value;
+                    if (key.trim() === "date") meta.date = value;
+                });
+            }
 
-    // 🔹 Load all metadata once
-    async function enrichArticles() {
-      const enriched = await Promise.all(
-        articles.map(async a => {
-          const meta = await getMeta(a);
-          return { ...a, ...meta };
-        })
-      );
+            return meta;
+        }
 
-      return enriched;
-    }
+        // 🔹 Load all metadata once
+        async function enrichArticles() {
+            const enriched = await Promise.all(
+                articles.map(async a => {
+                    const meta = await getMeta(a);
+                    return { ...a, ...meta };
+                })
+            );
 
-    enrichArticles().then(data => {
-      articles = data;
+            return enriched;
+        }
 
-      // SORT
-      articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+        enrichArticles().then(data => {
+            articles = data;
 
-      // LATEST
-      const latest = articles[0];
-      document.getElementById("latest-title").textContent = latest.title;
-      document.getElementById("latest-date").textContent = latest.date;
-      document.getElementById("latest-card").onclick = () => {
-        window.location.href = `article.html?slug=${latest.slug}`;
-      };
+            // SORT
+            articles.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      filteredData = [...articles];
+            // LATEST
+            const latest = articles[0];
+            document.getElementById("latest-title").textContent = latest.title;
+            document.getElementById("latest-date").textContent = latest.date;
+            document.getElementById("latest-card").onclick = () => {
+                window.location.href = `article.html?slug=${latest.slug}`;
+            };
 
-      // 🔹 Dynamic month filter
-      const uniqueMonths = [...new Set(
-        articles.map(a => {
-          const d = new Date(a.date);
-          return `${d.getFullYear()}-${d.getMonth()}`;
-        })
-      )];
+            filteredData = [...articles];
 
-      uniqueMonths.sort((a, b) => new Date(b) - new Date(a));
+            // 🔹 Dynamic month filter
+            const uniqueMonths = [...new Set(
+                articles.map(a => {
+                    const d = new Date(a.date);
+                    return `${d.getFullYear()}-${d.getMonth()}`;
+                })
+            )];
 
-      uniqueMonths.forEach(val => {
-        const [year, month] = val.split("-");
-        const date = new Date(year, month);
+            uniqueMonths.sort((a, b) => new Date(b) - new Date(a));
 
-        const option = document.createElement("option");
-        option.value = val;
-        option.textContent = date.toLocaleString("default", {
-          month: "long",
-          year: "numeric"
-        });
+            uniqueMonths.forEach(val => {
+                const [year, month] = val.split("-");
+                const date = new Date(year, month);
 
-        monthFilter.appendChild(option);
-      });
+                const option = document.createElement("option");
+                option.value = val;
+                option.textContent = date.toLocaleString("default", {
+                    month: "long",
+                    year: "numeric"
+                });
 
-      // 🔹 Render
-      function renderList(data) {
-        const totalPages = Math.ceil(data.length / perPage) || 1;
+                monthFilter.appendChild(option);
+            });
 
-        const start = (currentPage - 1) * perPage;
-        const paginated = data.slice(start, start + perPage);
+            // 🔹 Render
+            function renderList(data) {
+                const totalPages = Math.ceil(data.length / perPage) || 1;
 
-        listEl.innerHTML = paginated.map(article => `
+                const start = (currentPage - 1) * perPage;
+                const paginated = data.slice(start, start + perPage);
+
+                listEl.innerHTML = paginated.map(article => `
           <div class="card" onclick="window.location.href='article.html?slug=${article.slug}'">
             <h3>${article.title}</h3>
             <p class="date">${article.date}</p>
           </div>
         `).join("");
 
-        pageInfo.textContent = `${currentPage} / ${totalPages}`;
-        prevBtn.disabled = currentPage === 1;
-        nextBtn.disabled = currentPage === totalPages;
-      }
+                pageInfo.textContent = `${currentPage} / ${totalPages}`;
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages;
+            }
 
-      function applyFilters() {
-        const query = searchInput.value.trim().toLowerCase();
-        const selected = monthFilter.value;
+            function applyFilters() {
+                const query = searchInput.value.trim().toLowerCase();
+                const selected = monthFilter.value;
 
-        filteredData = articles.filter(a => {
-          const matchesSearch = a.title.toLowerCase().includes(query);
+                filteredData = articles.filter(a => {
+                    const matchesSearch = a.title.toLowerCase().includes(query);
 
-          const d = new Date(a.date);
-          const val = `${d.getFullYear()}-${d.getMonth()}`;
-          const matchesMonth = selected === "" || val === selected;
+                    const d = new Date(a.date);
+                    const val = `${d.getFullYear()}-${d.getMonth()}`;
+                    const matchesMonth = selected === "" || val === selected;
 
-          return matchesSearch && matchesMonth;
+                    return matchesSearch && matchesMonth;
+                });
+
+                currentPage = 1;
+                renderList(filteredData);
+            }
+
+            // EVENTS
+            searchInput.addEventListener("input", applyFilters);
+            monthFilter.addEventListener("change", applyFilters);
+
+            prevBtn.addEventListener("click", () => {
+                currentPage--;
+                renderList(filteredData);
+            });
+
+            nextBtn.addEventListener("click", () => {
+                currentPage++;
+                renderList(filteredData);
+            });
+
+            // INIT
+            renderList(filteredData);
         });
 
-        currentPage = 1;
-        renderList(filteredData);
-      }
-
-      // EVENTS
-      searchInput.addEventListener("input", applyFilters);
-      monthFilter.addEventListener("change", applyFilters);
-
-      prevBtn.addEventListener("click", () => {
-        currentPage--;
-        renderList(filteredData);
-      });
-
-      nextBtn.addEventListener("click", () => {
-        currentPage++;
-        renderList(filteredData);
-      });
-
-      // INIT
-      renderList(filteredData);
-    });
-
-  })
-  .catch(err => console.error(err));
+    })
+    .catch(err => console.error(err));
