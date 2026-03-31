@@ -19,7 +19,7 @@ fetch("data/articles.json")
             return;
         }
 
-        return fetch(`articles/${article.file}`);
+        return fetch(`./articles/${article.file}`);
     })
     .then(res => res.text())
     .then(text => {

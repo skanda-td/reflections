@@ -15,7 +15,7 @@ fetch("data/articles.json")
 
         // 🔹 Helper: extract metadata from MD
         async function getMeta(article) {
-            const res = await fetch(`articles/${article.file}`);
+            const res = await fetch(`./articles/${article.file}`);
             const text = await res.text();
 
             const parts = text.split('---');
