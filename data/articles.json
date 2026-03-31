@@ -1,10 +1,30 @@
 [
-  {
-    "slug": "simple-thinking",
-    "file": "simple-thinking.html"
-  },
-  {
-    "slug": "deep-work",
-    "file": "deep-work.html"
-  }
+    {
+        "slug": "simple-thinking",
+        "file": "simple-thinking.html"
+    },
+    {
+        "slug": "deep-work",
+        "file": "deep-work.html"
+    },
+    {
+        "slug": "clarity-through-action",
+        "file": "clarity-through-action.html"
+    },
+    {
+        "slug": "stop-consuming-start-creating",
+        "file": "stop-consuming-start-creating.html"
+    },
+    {
+        "slug": "slow-is-fast",
+        "file": "slow-is-fast.html"
+    },
+    {
+        "slug": "focus-over-multitasking",
+        "file": "focus-over-multitasking.html"
+    },
+    {
+        "slug": "thinking-vs-doing",
+        "file": "thinking-vs-doing.html"
+    }
 ]
