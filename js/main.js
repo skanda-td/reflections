@@ -16,25 +16,15 @@ fetch("data/articles.json")
         // 🔹 Helper: extract metadata from MD
         async function getMeta(article) {
             const res = await fetch(`./articles/${article.file}`);
-            const text = await res.text();
+            const html = await res.text();
 
-            const parts = text.split('---');
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
 
-            let meta = { title: "No Title", date: "" };
+            const title = doc.querySelector("h1")?.textContent || "No Title";
+            const date = doc.querySelector(".date")?.textContent || "";
 
-            if (parts.length >= 3) {
-                const fm = parts[1].trim();
-
-                fm.split("\n").forEach(line => {
-                    const [key, ...rest] = line.split(":");
-                    const value = rest.join(":").trim();
-
-                    if (key.trim() === "title") meta.title = value;
-                    if (key.trim() === "date") meta.date = value;
-                });
-            }
-
-            return meta;
+            return { title, date };
         }
 
         // 🔹 Load all metadata once

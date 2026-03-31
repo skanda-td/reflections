@@ -1,26 +1,10 @@
 [
   {
-    "slug": "overthinking-feels-productive",
-    "file": "overthinking-feels-productive.md"
-  },
-  {
-    "slug": "learning-focus",
-    "file": "learning-focus.md"
-  },
-  {
-    "slug": "building-habits",
-    "file": "building-habits.md"
-  },
-  {
-    "slug": "consistency-over-motivation",
-    "file": "consistency-over-motivation.md"
+    "slug": "simple-thinking",
+    "file": "simple-thinking.html"
   },
   {
     "slug": "deep-work",
-    "file": "deep-work.md"
-  },
-  {
-    "slug": "simple-thinking",
-    "file": "simple-thinking.md"
+    "file": "deep-work.html"
   }
 ]
