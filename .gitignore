@@ -1,68 +1,23 @@
-# ----------------------
-# OS Files
-# ----------------------
+# OS files
 .DS_Store
 Thumbs.db
 
-# ----------------------
-# Node / Package Managers
-# ----------------------
+# Node (only if you add scripts later)
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
 
-# ----------------------
-# Build / Output
-# ----------------------
-dist/
-build/
-.out/
-.cache/
-
-# ----------------------
-# Environment Files
-# ----------------------
-.env
-.env.*
-!.env.example
-
-# ----------------------
 # Logs
-# ----------------------
-logs/
 *.log
 
-# ----------------------
-# Editor / IDE
-# ----------------------
+# Environment files
+.env
+
+# VS Code
 .vscode/
-.idea/
+
+# Build / temp files (future-safe)
+dist/
+build/
+.cache/
+
+# Mac/Linux temp
 *.swp
-*.swo
-
-# ----------------------
-# Temporary Files
-# ----------------------
-tmp/
-temp/
-*.tmp
-
-# ----------------------
-# Coverage / Testing
-# ----------------------
-coverage/
-
-# ----------------------
-# Misc
-# ----------------------
-*.zip
-*.tar
-*.gz
-
-# ----------------------
-# System Generated
-# ----------------------
-*.pid
-*.seed
