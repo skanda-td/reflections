@@ -1,67 +1,192 @@
+/* =========================
+   DARK THEME (ONLY)
+========================= */
+:root {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+
+  --card-bg: #111827;
+  --border: #1f2937;
+
+  --input-bg: #020617;
+}
+
+/* =========================
+   BASE
+========================= */
 body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-    margin: 0;
-    color: #222;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
 
+/* =========================
+   HEADER
+========================= */
 .header {
-    max-width: 800px;
-    margin: 20px auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  max-width: 680px;
+  margin: 24px auto;
+  padding: 0 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+/* Site title */
+.header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Nav */
 .header a {
-    margin-left: 15px;
-    text-decoration: none;
-    color: #444;
+  text-decoration: none;
+  color: var(--muted);
+  margin-left: 16px;
+  font-size: 14px;
 }
 
+/* =========================
+   CONTAINER
+========================= */
 .container {
-    max-width: 800px;
-    margin: 20px auto;
+  max-width: 680px;
+  margin: 40px auto;
+  padding: 0 16px;
 }
 
+/* =========================
+   SECTION TITLES
+========================= */
+h2 {
+  font-size: 18px;
+  margin-top: 30px;
+  margin-bottom: 12px;
+}
+
+/* =========================
+   CARDS
+========================= */
 .card {
-    background: white;
-    padding: 16px;
-    border-radius: 10px;
-    margin-top: 10px;
-    border: 1px solid #ddd;
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 14px;
+  margin-top: 12px;
+  border: 1px solid var(--border);
+
+  transition: all 0.25s ease;
+  cursor: pointer;
 }
 
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+   DATE
+========================= */
 .date {
-    font-size: 14px;
-    color: gray;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
 }
 
+/* =========================
+   INPUTS
+========================= */
 input,
 select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  color: var(--text);
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
+/* =========================
+   PAGINATION
+========================= */
 .pagination {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 button {
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background: white;
-    cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #1f2937;
 }
 
 button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* =========================
+   ARTICLE PAGE
+========================= */
+#content {
+  max-width: 680px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/* Article title */
+#content h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* Article date */
+#content .date {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+/* Article text (Book style) */
+#content p {
+  font-size: 18px;
+  line-height: 1.9;
+  margin: 18px 0;
+  color: var(--text);
+
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+/* =========================
+   ABOUT PAGE
+========================= */
+.about {
+  max-width: 680px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.about p {
+  margin: 12px 0;
 }
