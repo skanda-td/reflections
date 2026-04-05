@@ -6,5 +6,9 @@
     {
         "slug": "circletheory",
         "file": "circletheory.html"
+    },
+    {
+        "slug": "negotiationtheory",
+        "file": "negotiationtheory.html"
     }
 ]
