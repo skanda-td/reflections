@@ -2,5 +2,9 @@
     {
         "slug": "dummy",
         "file": "dummy.html"
+    },
+    {
+        "slug": "circletheory",
+        "file": "circletheory.html"
     }
 ]
