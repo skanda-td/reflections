@@ -1,5 +1,5 @@
 /* =========================
-   DARK THEME (ONLY)
+   DARK THEME
 ========================= */
 :root {
   --bg: #0f172a;
@@ -156,7 +156,7 @@ button:disabled {
 #content h1 {
   font-size: 32px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 /* Article date */
@@ -166,16 +166,57 @@ button:disabled {
   margin-bottom: 24px;
 }
 
-/* Article text (Book style) */
-#content p {
+/* =========================
+   TEXT (Book style)
+========================= */
+#content p,
+#content li {
   font-size: 18px;
   line-height: 1.9;
-  margin: 18px 0;
   color: var(--text);
 
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
+}
+
+/* Paragraph spacing */
+#content p {
+  margin: 18px 0;
+}
+
+/* =========================
+   LISTS
+========================= */
+#content ul,
+#content ol {
+  padding-left: 22px;
+  margin: 16px 0;
+}
+
+/* List items spacing */
+#content li {
+  margin: 8px 0;
+}
+
+/* Nested lists */
+#content ul ul,
+#content ol ol {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+/* Bullet styles */
+#content ul {
+  list-style-type: disc;
+}
+
+#content ul ul {
+  list-style-type: circle;
+}
+
+#content ul ul ul {
+  list-style-type: square;
 }
 
 /* =========================
@@ -187,8 +228,17 @@ button:disabled {
   padding: 0 16px;
 }
 
+/* Text style (same as article) */
 .about p {
-  margin: 12px 0;
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--text);
+
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+
+  margin: 18px 0;
 }
 
 /* =========================
