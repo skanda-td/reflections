@@ -13,6 +13,15 @@ fetch("data/articles.json")
         const perPage = 5;
         let filteredData = [...articles];
 
+        function formatDate(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            });
+        }
+
         // 🔹 Helper: extract metadata from MD
         async function getMeta(article) {
             const res = await fetch(`./articles/${article.file}`);
@@ -48,7 +57,7 @@ fetch("data/articles.json")
             // LATEST
             const latest = articles[0];
             document.getElementById("latest-title").textContent = latest.title;
-            document.getElementById("latest-date").textContent = latest.date;
+            document.getElementById("latest-date").textContent = formatDate(latest.date);
             document.getElementById("latest-card").onclick = () => {
                 window.location.href = `article.html?slug=${latest.slug}`;
             };
@@ -89,7 +98,7 @@ fetch("data/articles.json")
                 listEl.innerHTML = paginated.map(article => `
           <div class="card" onclick="window.location.href='article.html?slug=${article.slug}'">
             <h3>${article.title}</h3>
-            <p class="date">${article.date}</p>
+            <p class="date">${formatDate(article.date)}</p>
           </div>
         `).join("");
 
