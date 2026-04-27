@@ -14,5 +14,9 @@
     {
         "slug": "criticalthinking",
         "file": "criticalthinking.html"
+    },
+    {
+        "slug": "jargondecoder-business",
+        "file": "jargondecoder-business.html"
     }
 ]
